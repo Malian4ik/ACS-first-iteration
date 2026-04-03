@@ -2,13 +2,28 @@ import Link from "next/link";
 
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { AvulusNav } from "@/components/layout/avulus-nav";
+import { PricingSection } from "@/components/pricing";
 import { contactLinks, cyberclubPage, sharedImages } from "@/lib/stitch-site";
+import { getDictionary, Locale } from "@/lib/dictionaries";
 
-export default function CyberClubPage() {
+export default async function CyberClubPage({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const { lang } = await params;
+  const t = getDictionary(lang);
+
+  const navItems = cyberclubPage.nav.map((item, i) => ({
+    ...item,
+    label: i === 0 ? t.nav.arena : t.nav.restaurant,
+    href: `/${lang}${item.href}`
+  }));
+
   return (
     <>
       <div className="watermark-arena" style={{ backgroundImage: `url(${sharedImages.arenaWatermark})` }} />
-      <AvulusNav items={cyberclubPage.nav} />
+      <AvulusNav items={navItems} lang={lang} />
 
       <main className="content-layer">
         <header className="avulus-grid relative flex min-h-[884px] flex-col items-center justify-center px-6 pt-20">
@@ -37,10 +52,10 @@ export default function CyberClubPage() {
             <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
               <Link
                 className="w-full bg-[#CA98FF] px-12 py-5 text-xl font-bold uppercase tracking-widest text-[#46007D] shadow-[0_10px_30px_rgba(202,152,255,0.2)] transition-all hover:bg-[#9c42f4] md:w-auto"
-                href={contactLinks.bookPc}
+                href={`/${lang}/cyberclub#book-pc`}
                 id="book-pc"
               >
-                BOOK A PC
+                {t.home.bookPc}
               </Link>
               <a
                 className="w-full border border-[#484849]/30 px-12 py-5 text-xl font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#262627] md:w-auto"
@@ -51,19 +66,19 @@ export default function CyberClubPage() {
             </div>
           </div>
 
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#CA98FF]/20">
-            <span className="material-symbols-outlined animate-bounce text-4xl">keyboard_double_arrow_down</span>
-          </div>
         </header>
 
         <section className="border-y border-[#484849]/15 bg-[#131314] py-12">
           <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 md:grid-cols-4">
-            {cyberclubPage.specs.map((spec) => (
-              <div key={spec.label} className="border-l-2 border-[#CA98FF] pl-4">
-                <span className="mb-1 block text-xs uppercase tracking-widest text-[#b772ff]">{spec.label}</span>
-                <span className="text-2xl font-bold">{spec.value}</span>
-              </div>
-            ))}
+            {cyberclubPage.specs.map((specDef, i) => {
+              const spec = t.cyberclub.specs[i];
+              return (
+                <div key={spec.label} className="border-l-2 border-[#CA98FF] pl-4">
+                  <span className="mb-1 block text-xs uppercase tracking-widest text-[#b772ff]">{spec.label}</span>
+                  <span className="text-2xl font-bold">{spec.value}</span>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -72,7 +87,9 @@ export default function CyberClubPage() {
             <div className="mb-16 flex items-end justify-between">
               <div>
                 <h2 className="mb-4 text-4xl font-bold uppercase tracking-tighter md:text-6xl">
-                  DEPLOYMENT <span className="text-[#FF6C8F]">ZONES</span>
+                  {t.cyberclub.zonesTitle.split(' ').map((word, i, arr) => 
+                     i === arr.length - 1 ? <span key={i} className="text-[#FF6C8F]">{word}</span> : word + ' '
+                  )}
                 </h2>
                 <p className="uppercase tracking-widest text-[#ADAAAB]">Select your operational environment</p>
               </div>
@@ -82,34 +99,39 @@ export default function CyberClubPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-0 md:grid-cols-3">
-              {cyberclubPage.zones.map((zone) => (
-                <article
-                  key={zone.title}
-                  className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden border border-[#484849]/10 bg-[#19191b] p-8"
-                >
-                  <div className="absolute inset-0 opacity-40 grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0">
-                    <img alt="" className="h-full w-full object-cover" src={zone.image} />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0f] via-[#0e0e0f]/40 to-transparent" />
+              {cyberclubPage.zones.map((zoneDef, i) => {
+                const zone = t.cyberclub.zones[i];
+                return (
+                  <article
+                    key={zone.title}
+                    className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden border border-[#484849]/10 bg-[#19191b] p-8"
+                  >
+                    <div className="absolute inset-0 opacity-40 grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0">
+                      <img alt="" className="h-full w-full object-cover" src={zoneDef.image} />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0f] via-[#0e0e0f]/40 to-transparent" />
 
-                  <div className="relative z-10">
-                    <span className="mb-2 block text-xs uppercase tracking-widest text-[#FF6C8F]">{zone.level}</span>
-                    <h3 className="mb-4 text-4xl font-bold uppercase tracking-tighter">{zone.title}</h3>
-                    <p className="mb-6 text-sm leading-relaxed text-[#ADAAAB]">{zone.body}</p>
-                    <ul className="mb-8 space-y-1 text-[10px] uppercase tracking-widest text-[#CA98FF]/80">
-                      {zone.bullets.map((bullet) => (
-                        <li key={bullet}>- {bullet}</li>
-                      ))}
-                    </ul>
-                    <Link className={`block w-full border py-4 text-center text-sm font-bold uppercase tracking-widest transition-all ${zone.accent}`} href={contactLinks.bookPc}>
-                      {zone.cta}
-                    </Link>
-                  </div>
-                </article>
-              ))}
+                    <div className="relative z-10">
+                      <span className="mb-2 block text-xs uppercase tracking-widest text-[#FF6C8F]">{zone.level}</span>
+                      <h3 className="mb-4 text-4xl font-bold uppercase tracking-tighter">{zone.title}</h3>
+                      <p className="mb-6 text-sm leading-relaxed text-[#ADAAAB]">{zone.body}</p>
+                      <ul className="mb-8 space-y-1 text-[10px] uppercase tracking-widest text-[#CA98FF]/80">
+                        {zone.bullets.map((bullet) => (
+                          <li key={bullet}>- {bullet}</li>
+                        ))}
+                      </ul>
+                      <Link className={`block w-full border py-4 text-center text-sm font-bold uppercase tracking-widest transition-all ${zoneDef.accent}`} href={contactLinks.bookPc}>
+                        {zone.cta}
+                      </Link>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
+
+        <PricingSection t={t.cyberclub.pricing} />
 
         <section className="avulus-grid overflow-hidden bg-[#131314] px-6 py-32" id="hardware">
           <div className="mx-auto grid max-w-7xl gap-20 lg:grid-cols-2 lg:items-center">
@@ -119,12 +141,15 @@ export default function CyberClubPage() {
                 <span className="text-[#CA98FF]">OVERRIDE</span>
               </h2>
               <div className="space-y-8">
-                {cyberclubPage.hardwarePanels.map((panel) => (
-                  <div key={panel.title} className={`border-l-4 bg-[#19191b] p-6 ${panel.accent}`}>
-                    <h4 className="mb-2 text-sm font-bold uppercase tracking-widest">{panel.title}</h4>
-                    <p className="leading-relaxed text-[#ADAAAB]">{panel.body}</p>
-                  </div>
-                ))}
+                {cyberclubPage.hardwarePanels.map((panelDef, i) => {
+                  const panel = t.cyberclub.hardwarePanels[i];
+                  return (
+                    <div key={panel.title} className={`border-l-4 bg-[#19191b] p-6 ${panelDef.accent}`}>
+                      <h4 className="mb-2 text-sm font-bold uppercase tracking-widest">{panel.title}</h4>
+                      <p className="leading-relaxed text-[#ADAAAB]">{panel.body}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -162,14 +187,14 @@ export default function CyberClubPage() {
                 className="bg-[#CA98FF] px-8 py-4 text-sm font-bold uppercase tracking-widest text-[#46007D] transition-transform hover:scale-[0.98]"
                 href={contactLinks.bookPc}
               >
-                BOOK A PC NOW
+                {t.home.bookPc}
               </Link>
             </div>
           </div>
         </div>
       </main>
 
-      <AvulusFooter />
+      <AvulusFooter lang={lang} />
     </>
   );
 }
