@@ -365,6 +365,6 @@ export const dictionaries = {
   }
 } as const;
 
-export function getDictionary(locale: Locale) {
-  return dictionaries[locale] || dictionaries["ru"];
+export function getDictionary(locale: string) {
+  return dictionaries[locale as Locale] || dictionaries["ru"];
 }
