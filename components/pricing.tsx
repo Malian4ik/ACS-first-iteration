@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { pricingData, ZonePricing } from "@/lib/pricing-data";
+import { getPricingData, ZonePricing } from "@/lib/pricing-data";
+import { Locale } from "@/lib/dictionaries";
 
 type PricingTranslations = {
   title: string;
+  subtitle: string;
   weekdays: string;
   weekends: string;
   day: string;
@@ -18,7 +20,8 @@ type PricingTranslations = {
   timeRangeNight: string;
 };
 
-export function PricingSection({ t }: { t: PricingTranslations }) {
+export function PricingSection({ t, lang }: { t: PricingTranslations; lang: Locale }) {
+  const pricingData = getPricingData(lang);
   const [activeZoneId, setActiveZoneId] = useState<string>(pricingData[0].id);
 
   const activeZone = pricingData.find((z) => z.id === activeZoneId) || pricingData[0];
@@ -82,9 +85,9 @@ export function PricingSection({ t }: { t: PricingTranslations }) {
       <div className="mx-auto max-w-7xl">
         <div className="mb-16">
           <h2 className="mb-4 text-4xl font-bold uppercase tracking-tighter md:text-6xl text-white">
-            <span className="text-[#CA98FF]">SELECT</span> {t.title.split(' ').slice(1).join(' ')}
+            {t.title}
           </h2>
-          <p className="uppercase tracking-widest text-[#ADAAAB]">Operational Rate Parameters</p>
+          <p className="uppercase tracking-widest text-[#ADAAAB]">{t.subtitle}</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">

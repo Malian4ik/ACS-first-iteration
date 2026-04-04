@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { AvulusNav } from "@/components/layout/avulus-nav";
@@ -5,6 +6,20 @@ import { RestaurantMenu } from "@/components/restaurant-menu";
 import TeamShowcase, { type ShowcaseDish } from "@/components/ui/team-showcase";
 import { restaurantPage, sharedImages } from "@/lib/stitch-site";
 import { getDictionary, Locale } from "@/lib/dictionaries";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const seo = getDictionary(lang).restaurant.seo;
+
+  return {
+    title: seo.title,
+    description: seo.description
+  };
+}
 
 export default async function RestaurantPage({
   params,
@@ -23,7 +38,7 @@ export default async function RestaurantPage({
   const foodShowcaseItems: ShowcaseDish[] = [
     {
       id: "dish-1",
-      name: "Void-Sea Tartare",
+      name: lang === "ru" ? "Тартар из лосося" : "Void-Sea Tartare",
       category: lang === "ru" ? "Холодная подача" : "Cold Starter",
       image: restaurantPage.dishes[0].image,
       description:
@@ -35,19 +50,19 @@ export default async function RestaurantPage({
     },
     {
       id: "dish-2",
-      name: "Neural Overload",
-      category: lang === "ru" ? "Барная карта" : "Cocktail",
-      image: restaurantPage.dishes[1].image,
+      name: lang === "ru" ? "Неоновый бар Avulus" : "Avulus Neon Bar",
+      category: lang === "ru" ? "Барная зона" : "Bar Scene",
+      image: restaurantPage.atmosphereImage,
       description:
         lang === "ru"
-          ? "Яркий коктейль добавляет ритм подборке и хорошо работает как контраст к еде."
-          : "A vivid cocktail that breaks up the food shots and gives the grid a stronger visual cadence.",
-      accent: lang === "ru" ? "Авторский микс" : "House Mix",
-      tags: lang === "ru" ? ["Цитрус", "Бар"] : ["Citrus", "Bar"]
+          ? "Светящийся бар хорошо передает настроение зала и визуально связывает кухню с коктейльной подачей."
+          : "The illuminated bar sets the mood of the room and ties the dining story to the cocktail program.",
+      accent: lang === "ru" ? "Бар и коктейли" : "Bar & Cocktails",
+      tags: lang === "ru" ? ["Неон", "Бар"] : ["Neon", "Bar"]
     },
     {
       id: "dish-3",
-      name: "Core Bypass Burger",
+      name: lang === "ru" ? "Фирменный бургер" : "Core Bypass Burger",
       category: lang === "ru" ? "Основное блюдо" : "Main Course",
       image: restaurantPage.dishes[2].image,
       description:
@@ -59,27 +74,27 @@ export default async function RestaurantPage({
     },
     {
       id: "dish-4",
-      name: "Grid-Sync Bites",
-      category: lang === "ru" ? "Стритфуд" : "Street Food",
-      image: restaurantPage.dishes[3].image,
-      description:
-        lang === "ru"
-          ? "Компактная закуска добавляет разнообразие по масштабу и не теряется при наведении."
-          : "A compact snack plate that adds size variation without getting lost when the gallery shifts focus.",
-      accent: lang === "ru" ? "Для компании" : "Sharing Plate",
-      tags: lang === "ru" ? ["Хруст", "Ночной выбор"] : ["Crunchy", "Late Night"]
-    },
-    {
-      id: "dish-5",
-      name: lang === "ru" ? "Private Room Dining" : "Private Room Dining",
-      category: lang === "ru" ? "Атмосфера" : "Ambience",
+      name: lang === "ru" ? "Лаунж-зона ресторана" : "Restaurant Lounge",
+      category: lang === "ru" ? "Интерьер" : "Interior",
       image: sharedImages.restaurantWatermark,
       description:
         lang === "ru"
-          ? "Интерьер оставлен как поддержка атмосферы, но теперь еда визуально ведет весь блок."
-          : "The room still supports the mood, but food now leads the section instead of being squeezed around it.",
-      accent: lang === "ru" ? "Премиум зал" : "Premium Room",
-      tags: lang === "ru" ? ["Интерьер", "VIP"] : ["Interior", "VIP"]
+          ? "Мягкий свет, приватная посадка и яркие акценты делают пространство более премиальным на фото."
+          : "Soft lounge seating, privacy, and vivid accents make the restaurant feel more premium in the gallery.",
+      accent: lang === "ru" ? "Атмосфера зала" : "Dining Mood",
+      tags: lang === "ru" ? ["Лаунж", "Посадка"] : ["Lounge", "Seating"]
+    },
+    {
+      id: "dish-5",
+      name: lang === "ru" ? "Барная стойка Avulus" : "Avulus Bar Counter",
+      category: lang === "ru" ? "Коктейльный сервис" : "Cocktail Service",
+      image: restaurantPage.heroImage,
+      description:
+        lang === "ru"
+          ? "Широкий кадр со стойкой и светом показывает ресторан как полноценное вечернее пространство, а не только меню."
+          : "The wide bar-counter shot presents the restaurant as a full evening destination, not just a menu page.",
+      accent: lang === "ru" ? "Вечерняя подача" : "Evening Venue",
+      tags: lang === "ru" ? ["Стойка", "Неон"] : ["Counter", "Neon"]
     }
   ];
 
@@ -93,7 +108,7 @@ export default async function RestaurantPage({
           <div className="absolute inset-0 z-0">
             {/* Temp hero picture injected here */}
             <Image
-              alt="Restaurant Hero Placeholder"
+              alt={lang === "ru" ? "Барная стойка ресторана Avulus в Москве" : "Avulus restaurant bar counter in Moscow"}
               className="object-cover opacity-30 grayscale"
               fill
               priority
@@ -104,17 +119,17 @@ export default async function RestaurantPage({
           </div>
 
           <div className="absolute left-10 top-24 hidden text-[10px] uppercase tracking-[0.2em] text-[#CA98FF]/40 md:block z-10">
-            SECTOR_ID: ALFA_REST
+            {t.restaurant.heroMeta.sector}
             <br />
-            STATUS: ACTIVE_CATERING
+            {t.restaurant.heroMeta.status}
             <br />
-            TEMP: 21.0C
+            {t.restaurant.heroMeta.temperature}
           </div>
 
           <div className="relative z-10 max-w-5xl text-center">
             <div className="mb-4 flex items-center justify-center gap-2">
               <span className="h-2 w-2 rounded-full bg-[#8EFF71] shadow-[0_0_8px_#8EFF71]" />
-              <span className="text-sm uppercase tracking-widest text-[#8EFF71]">Gastro-Link Active</span>
+              <span className="text-sm uppercase tracking-widest text-[#8EFF71]">{t.restaurant.heroStatus}</span>
             </div>
 
             <h1 className="text-glow mb-6 text-6xl font-bold uppercase leading-none tracking-tighter italic md:text-8xl lg:text-9xl text-white">
@@ -131,7 +146,7 @@ export default async function RestaurantPage({
                 className="w-full bg-[#CA98FF] px-12 py-5 text-xl font-bold uppercase tracking-widest text-[#46007D] shadow-[0_10px_30px_rgba(202,152,255,0.2)] transition-all hover:bg-[#9c42f4] md:w-auto"
                 href="#restaurant-menu"
               >
-                VIEW MENU
+                {t.restaurant.menuCta}
               </a>
             </div>
           </div>
@@ -139,23 +154,15 @@ export default async function RestaurantPage({
         </header>
 
         {/* Fancy Restaraunt Menu Component */}
-        <RestaurantMenu />
+        <RestaurantMenu lang={lang} />
 
         {/* Food Showcase Gallery */}
         <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 border-t border-[#484849]/15">
           <TeamShowcase
             items={foodShowcaseItems}
-            eyebrow={lang === "ru" ? "Food Showcase" : "Food Showcase"}
-            title={
-              lang === "ru"
-                ? "ФОТО БЛЮД В БОЛЕЕ СИЛЬНОМ ФОРМАТЕ"
-                : "Food Imagery In A Stronger Format"
-            }
-            description={
-              lang === "ru"
-                ? "Вместо тесной сетки блок теперь показывает блюда как редакционную подборку: крупнее, чище и заметно вкуснее визуально."
-                : "Instead of cramped squares, the dishes now live in an editorial-style staggered layout with cleaner crops and better focus."
-            }
+            eyebrow={t.restaurant.showcase.eyebrow}
+            title={t.restaurant.showcase.title}
+            description={t.restaurant.showcase.description}
           />
         </section>
       </main>

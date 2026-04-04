@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { menuData, MenuSection } from "@/lib/menu-data";
+import { getDictionary, Locale } from "@/lib/dictionaries";
+import { getMenuData } from "@/lib/menu-data";
 
-export function RestaurantMenu() {
+export function RestaurantMenu({ lang }: { lang: Locale }) {
+  const menuData = getMenuData(lang);
+  const t = getDictionary(lang).restaurant.menu;
   const [activeSectionId, setActiveSectionId] = useState<string>(menuData[0].id);
   const activeSection = menuData.find((s) => s.id === activeSectionId) || menuData[0];
 
@@ -12,9 +15,9 @@ export function RestaurantMenu() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-5xl font-bold uppercase tracking-tighter md:text-7xl text-white">
-            AVULUS <span className="text-[#CA98FF]">МЕНЮ</span>
+            AVULUS <span className="text-[#CA98FF]">{t.titleAccent}</span>
           </h2>
-          <p className="uppercase tracking-[0.3em] text-[#ADAAAB]">Вызов официанта: +7 969 031 48 79</p>
+          <p className="uppercase tracking-[0.3em] text-[#ADAAAB]">{t.waiterCall}: +7 969 031 48 79</p>
         </div>
 
         {/* Top Level Category Tabs */}

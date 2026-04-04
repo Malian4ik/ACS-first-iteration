@@ -28,25 +28,25 @@ export default async function CyberClubPage({
       <main className="content-layer">
         <header className="avulus-grid relative flex min-h-[884px] flex-col items-center justify-center px-6 pt-20">
           <div className="absolute left-10 top-24 hidden text-[10px] uppercase tracking-[0.2em] text-[#CA98FF]/40 md:block">
-            COORD_X: 47.1293
+            {t.cyberclub.heroMeta.coordX}
             <br />
-            COORD_Y: 28.5901
+            {t.cyberclub.heroMeta.coordY}
             <br />
-            STATUS: ACTIVE_COMMAND
+            {t.cyberclub.heroMeta.status}
           </div>
 
           <div className="z-10 max-w-5xl text-center">
             <div className="mb-4 flex items-center justify-center gap-2">
               <span className="h-2 w-2 rounded-full bg-[#8EFF71] shadow-[0_0_8px_#8EFF71]" />
-              <span className="text-sm uppercase tracking-widest text-[#8EFF71]">Operational Readiness 100%</span>
+              <span className="text-sm uppercase tracking-widest text-[#8EFF71]">{t.cyberclub.heroStatus}</span>
             </div>
 
             <h1 className="text-glow mb-6 text-6xl font-bold uppercase leading-none tracking-tighter italic md:text-8xl lg:text-9xl">
-              THE COMMAND <br />
-              <span className="text-[#CA98FF]">CENTER</span>
+              {t.cyberclub.heroTitleLine1} <br />
+              <span className="text-[#CA98FF]">{t.cyberclub.heroTitleLine2}</span>
             </h1>
             <p className="mx-auto mb-10 max-w-2xl text-xl uppercase tracking-wide text-[#ADAAAB] md:text-2xl">
-              High-performance gaming infrastructure for the elite operator.
+              {t.cyberclub.heroSubtitle}
             </p>
 
             <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
@@ -61,7 +61,7 @@ export default async function CyberClubPage({
                 className="w-full border border-[#484849]/30 px-12 py-5 text-xl font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#262627] md:w-auto"
                 href="#hardware"
               >
-                VIEW SPECS
+                {t.cyberclub.viewSpecs}
               </a>
             </div>
           </div>
@@ -91,10 +91,10 @@ export default async function CyberClubPage({
                      i === arr.length - 1 ? <span key={i} className="text-[#FF6C8F]">{word}</span> : word + ' '
                   )}
                 </h2>
-                <p className="uppercase tracking-widest text-[#ADAAAB]">Select your operational environment</p>
+                <p className="uppercase tracking-widest text-[#ADAAAB]">{t.cyberclub.zonesSubtitle}</p>
               </div>
               <div className="hidden text-right text-xs uppercase tracking-[0.3em] text-[#484849] md:block">
-                ZONE_TYPE // AUTH_REQ
+                {t.cyberclub.zonesMeta}
               </div>
             </div>
 
@@ -131,14 +131,14 @@ export default async function CyberClubPage({
           </div>
         </section>
 
-        <PricingSection t={t.cyberclub.pricing} />
+        <PricingSection t={t.cyberclub.pricing} lang={lang} />
 
         <section className="avulus-grid overflow-hidden bg-[#131314] px-6 py-32" id="hardware">
           <div className="mx-auto grid max-w-7xl gap-20 lg:grid-cols-2 lg:items-center">
             <div>
               <h2 className="mb-8 text-5xl font-bold uppercase tracking-tighter italic">
-                HARDWARE <br />
-                <span className="text-[#CA98FF]">OVERRIDE</span>
+                {t.cyberclub.hardwareTitleLine1} <br />
+                <span className="text-[#CA98FF]">{t.cyberclub.hardwareTitleLine2}</span>
               </h2>
               <div className="space-y-8">
                 {cyberclubPage.hardwarePanels.map((panelDef, i) => {
@@ -160,16 +160,16 @@ export default async function CyberClubPage({
                 <img alt="" className="aspect-square w-full object-cover" src={cyberclubPage.hardwareImage} />
                 <div className="absolute right-4 top-4 flex gap-2">
                   <span className="border border-[#CA98FF]/30 bg-black/80 px-2 py-1 text-[10px] uppercase tracking-widest text-[#CA98FF]">
-                    Live Diagnostics
+                    {t.cyberclub.diagnostics}
                   </span>
                   <span className="border border-[#8EFF71]/30 bg-black/80 px-2 py-1 text-[10px] uppercase tracking-widest text-[#8EFF71]">
-                    Cooling: 24°C
+                    {t.cyberclub.cooling}
                   </span>
                 </div>
               </div>
               <div className="mt-8 flex justify-between text-[10px] uppercase tracking-widest text-white/40">
-                <span>HW_IDENT: XJ-992-ARENA</span>
-                <span>FIRMWARE: V2.4.9 ACTIVE</span>
+                <span>{t.cyberclub.hardwareIdent}</span>
+                <span>{t.cyberclub.firmware}</span>
               </div>
             </div>
           </div>
@@ -179,8 +179,8 @@ export default async function CyberClubPage({
           <div className="mx-auto flex max-w-7xl justify-end">
             <div className="glass-panel pointer-events-auto flex items-center gap-6 border border-[#484849]/20 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] md:p-6">
               <div className="hidden sm:block">
-                <div className="mb-1 text-[10px] uppercase tracking-widest text-[#CA98FF]">Status: Slots Available</div>
-                <div className="text-xl font-bold uppercase tracking-tighter">MISSION READY</div>
+                <div className="mb-1 text-[10px] uppercase tracking-widest text-[#CA98FF]">{t.cyberclub.slotsStatus}</div>
+                <div className="text-xl font-bold uppercase tracking-tighter">{t.cyberclub.missionReady}</div>
               </div>
               <div className="hidden h-10 w-px bg-[#484849]/30 sm:block" />
               <Link

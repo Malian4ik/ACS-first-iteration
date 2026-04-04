@@ -14,9 +14,9 @@ export const contactLinks = {
 
 export const sharedImages = {
   logo: "/images/avulus-logo.png",
-  homeWatermark: "/images/hero-main.jpg",
-  arenaWatermark: "/images/cyberclub-team.jpg",
-  restaurantWatermark: "/images/restaurant-room.jpg"
+  homeWatermark: "/images/3C2A2349.jpg",
+  arenaWatermark: "/images/3C2A2349.jpg",
+  restaurantWatermark: "/images/DAN_3246-HDR_resized.jpg"
 };
 
 export const homePage = {
@@ -36,7 +36,7 @@ export const homePage = {
       accent: "bg-[#CA98FF] text-[#46007D]",
       icon: "sensors",
       textColor: "text-primary",
-      image: "/images/cyberclub-card.jpg"
+      image: "/images/3C2A2349.jpg"
     },
     {
       label: "SECTOR 02",
@@ -49,7 +49,7 @@ export const homePage = {
       accent: "bg-[#FF6C8F] text-[#480019]",
       icon: "restaurant",
       textColor: "text-secondary",
-      image: "/images/restaurant-card.jpg"
+      image: "/images/DAN_3426-HDR_resized.jpg"
     }
   ],
   features: [
@@ -93,7 +93,7 @@ export const cyberclubPage = {
       bullets: ["PRIVATE ACCESS TUNNEL", "ERGONOMIC XL SEATING", "PERIPHERAL CUSTOMIZATION"],
       cta: "RESERVE SLOT",
       accent: "text-secondary border-primary text-primary hover:bg-primary hover:text-on-primary",
-      image: "/images/cyberclub-card.jpg"
+      image: "/images/3C2A2349.jpg"
     },
     {
       level: "Level 2 // Duo",
@@ -102,7 +102,7 @@ export const cyberclubPage = {
       bullets: ["DUAL-SYNC COMM-LINK", "SHARED COOLING GRID", "COORDINATED LIGHTING"],
       cta: "RESERVE SLOT",
       accent: "text-primary bg-primary text-on-primary hover:bg-primary-dim",
-      image: "/images/cyberclub-vip.jpg"
+      image: "/images/3C2A2583.jpg"
     },
     {
       level: "Level 3 // Bootcamp",
@@ -134,7 +134,7 @@ export const cyberclubPage = {
       accent: "border-tertiary text-tertiary"
     }
   ],
-  hardwareImage: "/images/cyberclub-team.jpg"
+  hardwareImage: "/images/3C2A2583.jpg"
 };
 
 export const restaurantPage = {
@@ -142,7 +142,7 @@ export const restaurantPage = {
     { label: "ARENA", href: "/cyberclub" },
     { label: "RESTAURANT", href: "/restaurant", active: true }
   ] satisfies NavItem[],
-  heroImage: "/images/restaurant-room.jpg",
+  heroImage: "/images/DAN_3426-HDR_resized.jpg",
   dishes: [
     {
       label: "DISH // 01",
@@ -170,7 +170,7 @@ export const restaurantPage = {
       image: "/images/cyberclub-vip.jpg"
     }
   ],
-  atmosphereImage: "/images/restaurant-card.jpg",
+  atmosphereImage: "/images/DAN_3251-HDR_resized.jpg",
   atmosphereBullets: [
     {
       icon: "local_police",

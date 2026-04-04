@@ -29,7 +29,7 @@ export default async function HomePage({
         <section className="relative flex h-screen min-h-[884px] flex-col items-center justify-center overflow-hidden px-4 text-center">
           <div className="parallax-outline">AVULUS</div>
           <div className="absolute left-10 top-10 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-[#484849] lg:block">
-            SYS_READY // LOC: 55.7558° N, 37.6173° E
+            {t.home.heroMetaTop}
           </div>
 
           <img
@@ -61,7 +61,7 @@ export default async function HomePage({
           </div>
 
           <div className="absolute bottom-10 right-10 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-[#484849] lg:block">
-            LATENCY: 0.04MS // STATUS: ONLINE <span className="ml-2 inline-block h-2 w-2 bg-[#8EFF71]" />
+            {t.home.heroMetaBottom} <span className="ml-2 inline-block h-2 w-2 bg-[#8EFF71]" />
           </div>
         </section>
 

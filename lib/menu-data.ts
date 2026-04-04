@@ -1,3 +1,5 @@
+import type { Locale } from "@/lib/dictionaries";
+
 export type MenuItem = {
   name: string;
   weight?: string;
@@ -17,10 +19,10 @@ export type MenuSection = {
   categories: MenuCategory[];
 };
 
-export const menuData: MenuSection[] = [
+const menuDataRu: MenuSection[] = [
   {
     id: "food",
-    title: "FOOD",
+    title: "ЕДА",
     categories: [
       {
         id: "breakfasts",
@@ -96,7 +98,7 @@ export const menuData: MenuSection[] = [
       },
       {
         id: "starters",
-        title: "СТАРТЕРЫ / STREET FOOD",
+        title: "СТАРТЕРЫ / СТРИТФУД",
         items: [
           { name: "Кесадилья с цыпленком", weight: "400г", price: "780" },
           { name: "Кесадилья с рваной говядиной", weight: "400г", price: "880" },
@@ -137,35 +139,35 @@ export const menuData: MenuSection[] = [
       },
       {
         id: "desserts",
-        title: "GELATO & СОРБЕТ",
+        title: "ДЖЕЛАТО И СОРБЕТ",
         items: [
           { name: "Бурбонская ваниль", weight: "50г", price: "300" },
-          { name: "Шоколад швейцарский", weight: "50г", price: "300" },
+          { name: "Швейцарский шоколад", weight: "50г", price: "300" },
           { name: "Соленая карамель", weight: "50г", price: "300" },
           { name: "Сицилийская фисташка", weight: "50г", price: "300" },
           { name: "Клубника со сливками", weight: "50г", price: "300" },
           { name: "Халва", weight: "50г", price: "300" },
           { name: "Печенье-карамель", weight: "50г", price: "300" },
           { name: "Зеленый чай матча", weight: "50г", price: "300" },
-          { name: "Лимон-лайм (Сорбет)", weight: "50г", price: "300" },
-          { name: "Клубника-базилик (Сорбет)", weight: "50г", price: "300" },
-          { name: "Малина (Сорбет)", weight: "50г", price: "300" },
-          { name: "Манго-маракуйя (Сорбет)", weight: "50г", price: "300" },
-          { name: "Зеленое яблоко (Сорбет)", weight: "50г", price: "300" }
+          { name: "Лимон-лайм (сорбет)", weight: "50г", price: "300" },
+          { name: "Клубника-базилик (сорбет)", weight: "50г", price: "300" },
+          { name: "Малина (сорбет)", weight: "50г", price: "300" },
+          { name: "Манго-маракуйя (сорбет)", weight: "50г", price: "300" },
+          { name: "Зеленое яблоко (сорбет)", weight: "50г", price: "300" }
         ]
       }
     ]
   },
   {
     id: "drinks",
-    title: "DRINKS",
+    title: "НАПИТКИ",
     categories: [
       {
         id: "tea",
         title: "ЧАЙ",
         items: [
           { name: "Эрл Грей", weight: "500мл", price: "350" },
-          { name: "Молочный Улун", weight: "500мл", price: "350" },
+          { name: "Молочный улун", weight: "500мл", price: "350" },
           { name: "Сенча", weight: "500мл", price: "350" },
           { name: "Жасмин", weight: "500мл", price: "350" },
           { name: "Ассам", weight: "500мл", price: "350" },
@@ -235,7 +237,7 @@ export const menuData: MenuSection[] = [
   },
   {
     id: "bar",
-    title: "BAR",
+    title: "БАР",
     categories: [
       {
         id: "beer",
@@ -261,15 +263,15 @@ export const menuData: MenuSection[] = [
         id: "strong",
         title: "КРЕПКИЕ НАПИТКИ",
         items: [
-          { name: "Talisker 10 (Односолодовый виски)", weight: "40мл", price: "1300" },
+          { name: "Talisker 10 (односолодовый виски)", weight: "40мл", price: "1300" },
           { name: "Macallan Double Cask 12", weight: "40мл", price: "2000" },
           { name: "Singleton 12", weight: "40мл", price: "1000" },
           { name: "Laphroaig 10", weight: "40мл", price: "1500" },
           { name: "Auchentoshan Oak", weight: "40мл", price: "1000" },
-          { name: "Jack Daniel's (Американский виски)", weight: "40мл", price: "600" },
+          { name: "Jack Daniel's (американский виски)", weight: "40мл", price: "600" },
           { name: "Jim Beam", weight: "40мл", price: "500" },
           { name: "Woodford Reserve", weight: "40мл", price: "800" },
-          { name: "Chivas Regal 12 (Купажированный)", weight: "40мл", price: "800" },
+          { name: "Chivas Regal 12 (купажированный)", weight: "40мл", price: "800" },
           { name: "Ballantine's Finest", weight: "40мл", price: "500" },
           { name: "Monkey Shoulder Original", weight: "40мл", price: "900" },
           { name: "Bushmills Original", weight: "40мл", price: "500" },
@@ -279,18 +281,18 @@ export const menuData: MenuSection[] = [
           { name: "Ginster", weight: "40мл", price: "400" },
           { name: "Nordes", weight: "40мл", price: "1200" },
           { name: "Crafters London Dry", weight: "40мл", price: "900" },
-          { name: "Zacapa Centenario, Solera Gran Reserva 23 (Ром)", weight: "40мл", price: "1100" },
+          { name: "Zacapa Centenario, Solera Gran Reserva 23 (ром)", weight: "40мл", price: "1100" },
           { name: "Legendario Anejo Blanco", weight: "40мл", price: "500" },
           { name: "Legendario Ron Dorado", weight: "40мл", price: "550" },
           { name: "Legendario Elixir de Cuba", weight: "40мл", price: "600" },
-          { name: "Hennessy XO (Коньяк)", weight: "40мл", price: "3500" },
+          { name: "Hennessy XO (коньяк)", weight: "40мл", price: "3500" },
           { name: "Courvoisier VS", weight: "40мл", price: "1300" },
           { name: "Courvoisier VSOP", weight: "40мл", price: "1800" },
-          { name: "Espolon Blanco (Текила)", weight: "40мл", price: "600" },
+          { name: "Espolon Blanco (текила)", weight: "40мл", price: "600" },
           { name: "Espolon Reposado", weight: "40мл", price: "600" },
           { name: "Jose Cuervo Especial Blanco", weight: "40мл", price: "500" },
           { name: "Jose Cuervo Especial Reposado", weight: "40мл", price: "500" },
-          { name: "Beluga Noble (Водка)", weight: "40мл", price: "450" },
+          { name: "Beluga Noble (водка)", weight: "40мл", price: "450" },
           { name: "Чистые росы", weight: "40мл", price: "600" },
           { name: "Балчуг XIX век", weight: "40мл", price: "400" }
         ]
@@ -312,11 +314,11 @@ export const menuData: MenuSection[] = [
         id: "wine",
         title: "ВИНО",
         items: [
-          { name: "Palmberg Riesling Trocken (Белое)", weight: "125мл", price: "800" },
-          { name: "Sonnengold Gruner Veltliner (Белое)", weight: "125мл", price: "800" },
-          { name: "Marlborough Sounds Sauvignon Blanc (Белое)", weight: "125мл", price: "900" },
-          { name: "Marlborough Sounds Pinot Noir (Красное)", weight: "125мл", price: "900" },
-          { name: "Encanto Rosso Terre, Nero d'Avola (Красное)", weight: "125мл", price: "800" }
+          { name: "Palmberg Riesling Trocken (белое)", weight: "125мл", price: "800" },
+          { name: "Sonnengold Gruner Veltliner (белое)", weight: "125мл", price: "800" },
+          { name: "Marlborough Sounds Sauvignon Blanc (белое)", weight: "125мл", price: "900" },
+          { name: "Marlborough Sounds Pinot Noir (красное)", weight: "125мл", price: "900" },
+          { name: "Encanto Rosso Terre, Nero d'Avola (красное)", weight: "125мл", price: "800" }
         ]
       },
       {
@@ -333,7 +335,7 @@ export const menuData: MenuSection[] = [
   },
   {
     id: "cocktails",
-    title: "COCKTAILS",
+    title: "КОКТЕЙЛИ",
     categories: [
       {
         id: "signature",
@@ -368,3 +370,224 @@ export const menuData: MenuSection[] = [
     ]
   }
 ];
+
+const sectionTitleEn: Record<string, string> = {
+  "ЕДА": "FOOD",
+  "НАПИТКИ": "DRINKS",
+  "БАР": "BAR",
+  "КОКТЕЙЛИ": "COCKTAILS"
+};
+
+const categoryTitleEn: Record<string, string> = {
+  "ЗАВТРАКИ": "BREAKFASTS",
+  "САЛАТЫ": "SALADS",
+  "СУПЫ": "SOUPS",
+  "ПИЦЦА / БУРГЕРЫ": "PIZZA / BURGERS",
+  "СТАРТЕРЫ / СТРИТФУД": "STARTERS / STREET FOOD",
+  "ГОРЯЧИЕ БЛЮДА / ПАСТА": "HOT DISHES / PASTA",
+  "ДЖЕЛАТО И СОРБЕТ": "GELATO & SORBET",
+  "ЧАЙ": "TEA",
+  "КОФЕ": "COFFEE",
+  "ЛИМОНАДЫ": "LEMONADES",
+  "СВЕЖЕВЫЖАТЫЕ СОКИ": "FRESH JUICES",
+  "ВОДА И СОКИ": "WATER & JUICES",
+  "ГАЗИРОВКА": "SODA",
+  "ЭНЕРГЕТИКИ": "ENERGY DRINKS",
+  "ПИВО": "BEER",
+  "ИГРИСТОЕ И ШАМПАНСКОЕ": "SPARKLING & CHAMPAGNE",
+  "КРЕПКИЕ НАПИТКИ": "SPIRITS",
+  "АПЕРИТИВ / ЛИКЕР": "APERITIF / LIQUEUR",
+  "ВИНО": "WINE",
+  "НАСТОЙКИ": "INFUSIONS",
+  "АВТОРСКИЕ": "SIGNATURE",
+  "КЛАССИЧЕСКИЕ": "CLASSICS"
+};
+
+const itemNameEn: Record<string, string> = {
+  "Каша пшенная с тыквой": "Millet porridge with pumpkin",
+  "Блинчики с мясом": "Meat crepes",
+  "Блинчики с творогом": "Cottage cheese crepes",
+  "Большой тост с авокадо и яйцом пашот": "Large avocado toast with poached egg",
+  "Французский омлет с лососем": "French omelet with salmon",
+  "Яичница шакшука": "Shakshuka eggs",
+  "Английский завтрак": "English breakfast",
+  "Скандинавский завтрак": "Scandinavian breakfast",
+  "Средиземноморский завтрак": "Mediterranean breakfast",
+  "Творог со сливочным муссом и ягодами": "Farmer cheese with cream mousse and berries",
+  "Сырники с ягодами и сливочным кремом": "Syrniki with berries and cream",
+  "Рисовая каша на кокосовом молоке": "Rice porridge with coconut milk",
+  "Злаковая каша с яйцом пашот и пармезаном": "Grain porridge with poached egg and parmesan",
+  "Картофельные вафли с лососем и сливочным сыром": "Potato waffles with salmon and cream cheese",
+  "Картофельные вафли с криспи беконом, яичницей и сырным соусом": "Potato waffles with crispy bacon, fried egg and cheese sauce",
+  "Тар-тар из говядины": "Beef tartare",
+  "Цезарь деревенский с курицей и яйцом": "Rustic Caesar with chicken and egg",
+  "Цезарь с креветками": "Caesar with shrimp",
+  "Коул-слоу": "Coleslaw",
+  "Овощной салат": "Vegetable salad",
+  "Карпачо из говядины в соусе тонато": "Beef carpaccio with tonnato sauce",
+  "Зеленый салат": "Green salad",
+  "Салат с хрустящими баклажанами и страчателлой": "Salad with crispy eggplant and stracciatella",
+  "Гриль-салат из говяжьего филе": "Grilled beef fillet salad",
+  "Том-ям": "Tom Yum",
+  "Борщ с говядиной": "Borscht with beef",
+  "Суп-пюре томатный": "Tomato cream soup",
+  "Куриный бульон с тортелини": "Chicken broth with tortellini",
+  "Суп-пюре грибной": "Mushroom cream soup",
+  "Солянка мясная сборная": "Meat solyanka",
+  "Острая мясная пицца": "Spicy meat pizza",
+  "Пицца груша с горгонзолой": "Pear and gorgonzola pizza",
+  "Пицца капри": "Capri pizza",
+  "Пицца курица-барбекю": "BBQ chicken pizza",
+  "Пицца пеперони": "Pepperoni pizza",
+  "Пицца маргарита": "Margherita pizza",
+  "Пицца маргарита со страчателлой и рукколой": "Margherita with stracciatella and arugula",
+  "Пицца цезарь с курицей": "Chicken Caesar pizza",
+  "Закрытый пицца-бургер": "Closed pizza burger",
+  "Закрытый бургер мексиканский": "Closed Mexican burger",
+  "Закрытый бургер куриный с беконом": "Closed chicken burger with bacon",
+  "Закрытый бургер азиатский": "Closed Asian burger",
+  "Закрытый бургер камамбер": "Closed Camembert burger",
+  "Бургер с цыплёнком": "Chicken burger",
+  "Бургер мега-чиз": "Mega cheese burger",
+  "Бургер барбекю": "BBQ burger",
+  "Чизбургер": "Cheeseburger",
+  "Бургер Биг-геймер": "Big Gamer burger",
+  "Кесадилья с цыпленком": "Chicken quesadilla",
+  "Кесадилья с рваной говядиной": "Pulled beef quesadilla",
+  "Буррито с цыпленком": "Chicken burrito",
+  "Буррито с реберным мясом": "Rib meat burrito",
+  "Шаурма с реберным мясом": "Shawarma with rib meat",
+  "Шаурма с курицей": "Chicken shawarma",
+  "Клаб-сэндвич": "Club sandwich",
+  "Начос с чили кон карне и сырным соусом": "Nachos with chili con carne and cheese sauce",
+  "Наггетсы куриные": "Chicken nuggets",
+  "Картофель фри": "French fries",
+  "Сырные палочки (медальоны)": "Cheese sticks",
+  "Луковые кольца": "Onion rings",
+  "Стрипсы куриные": "Chicken strips",
+  "Пивное плато": "Beer platter",
+  "Хлебная корзина с ароматным маслом": "Bread basket with flavored butter",
+  "Куриные крылья в соусе Jack Daniel's": "Chicken wings in Jack Daniel's sauce",
+  "Ребра свиные томленые в соусе Jack Daniel's": "Slow-cooked pork ribs in Jack Daniel's sauce",
+  "Фиш & Чипс": "Fish & Chips",
+  "Бифштекс из мраморной говядины с яйцом пашот": "Marbled beef steak with poached egg",
+  "Стейк Рибай": "Ribeye steak",
+  "Стейк стриплойн": "Striploin steak",
+  "Стейк из семги с брокколи гриль и соусом лимончелло": "Salmon steak with grilled broccoli and limoncello sauce",
+  "Паста с мясным рагу": "Pasta with meat ragu",
+  "Паста карбонара": "Carbonara pasta",
+  "Паста Альфредо с курицей": "Chicken Alfredo pasta",
+  "Лингвини с креветками и соусом биск": "Linguine with shrimp and bisque sauce",
+  "Паста с лососем": "Salmon pasta",
+  "Орзо с белыми грибами": "Orzo with porcini mushrooms",
+  "Картофельное пюре": "Mashed potatoes",
+  "Бурбонская ваниль": "Bourbon vanilla",
+  "Швейцарский шоколад": "Swiss chocolate",
+  "Соленая карамель": "Salted caramel",
+  "Сицилийская фисташка": "Sicilian pistachio",
+  "Клубника со сливками": "Strawberries and cream",
+  "Халва": "Halva",
+  "Печенье-карамель": "Cookie caramel",
+  "Зеленый чай матча": "Matcha green tea",
+  "Лимон-лайм (сорбет)": "Lemon-lime sorbet",
+  "Клубника-базилик (сорбет)": "Strawberry-basil sorbet",
+  "Малина (сорбет)": "Raspberry sorbet",
+  "Манго-маракуйя (сорбет)": "Mango-passion fruit sorbet",
+  "Зеленое яблоко (сорбет)": "Green apple sorbet",
+  "Молочный улун": "Milk Oolong",
+  "Эрл Грей": "Earl Grey",
+  "Сенча": "Sencha",
+  "Жасмин": "Jasmine",
+  "Ассам": "Assam",
+  "Сладкий фрукт": "Sweet Fruit",
+  "Тегуаньинь": "Tie Guan Yin",
+  "Габа": "GABA tea",
+  "Шу Пуэр": "Shu Pu-erh",
+  "Эспрессо": "Espresso",
+  "Доппио": "Doppio",
+  "Американо": "Americano",
+  "Латте": "Latte",
+  "Капучино": "Cappuccino",
+  "Раф": "Raf coffee",
+  "Флэт уайт": "Flat White",
+  "Какао": "Cocoa",
+  "Маракуйя, вишня, ваниль": "Passion fruit, cherry, vanilla",
+  "Клубника, каламанси, лемонграсс": "Strawberry, calamansi, lemongrass",
+  "Грейпфрут": "Grapefruit",
+  "Апельсин": "Orange",
+  "Evervess Индиан Тоник": "Evervess Indian Tonic",
+  "Clausthaler Original б/а": "Clausthaler Original non-alcoholic",
+  "Talisker 10 (односолодовый виски)": "Talisker 10 (single malt whisky)",
+  "Jack Daniel's (американский виски)": "Jack Daniel's (American whiskey)",
+  "Chivas Regal 12 (купажированный)": "Chivas Regal 12 (blended whisky)",
+  "Zacapa Centenario, Solera Gran Reserva 23 (ром)": "Zacapa Centenario, Solera Gran Reserva 23 (rum)",
+  "Hennessy XO (коньяк)": "Hennessy XO (cognac)",
+  "Espolon Blanco (текила)": "Espolon Blanco (tequila)",
+  "Beluga Noble (водка)": "Beluga Noble (vodka)",
+  "Чистые росы": "Chistye Rosy",
+  "Балчуг XIX век": "Balchug XIX Century",
+  "Palmberg Riesling Trocken (белое)": "Palmberg Riesling Trocken (white)",
+  "Sonnengold Gruner Veltliner (белое)": "Sonnengold Gruner Veltliner (white)",
+  "Marlborough Sounds Sauvignon Blanc (белое)": "Marlborough Sounds Sauvignon Blanc (white)",
+  "Marlborough Sounds Pinot Noir (красное)": "Marlborough Sounds Pinot Noir (red)",
+  "Encanto Rosso Terre, Nero d'Avola (красное)": "Encanto Rosso Terre, Nero d'Avola (red)",
+  "Джин на малине": "Raspberry gin infusion",
+  "Лимончелло": "Limoncello",
+  "Водка на клюкве": "Cranberry vodka infusion",
+  "Водка на черной смородине": "Blackcurrant vodka infusion"
+};
+
+const descriptionEn: Record<string, string> = {
+  "Джин на мармеладе, чупа-чупс, кордиал клубника, рислинг": "Gin infused with marmalade, lollipop notes, strawberry cordial, Riesling",
+  "Водка на клюкве, трипл сек, сок лайма": "Cranberry vodka infusion, triple sec, lime juice",
+  "Водка на черной смородине, кордиал виноград, лемонграсс, маракуйя, сухое игристое вино": "Blackcurrant vodka infusion, grape cordial, lemongrass, passion fruit, dry sparkling wine",
+  "Джин на каффирском лайме, каламанси, бузина, трипл сек, пена из маракуйи": "Gin infused with kaffir lime, calamansi, elderflower, triple sec, passion fruit foam",
+  "Джин на малине, кампари, личи, тоник": "Raspberry gin infusion, Campari, lychee, tonic",
+  "Водка на клубнике с лаймом, сухое игристое вино": "Strawberry vodka with lime, dry sparkling wine",
+  "Лимончелло, ликер сауэр эппл, лимонный сок, белок": "Limoncello, sour apple liqueur, lemon juice, egg white",
+  "Джин на барбарисках, вермут экстра драй, красный сладкий вермут, бузина": "Gin infused with barberry candy, extra dry vermouth, sweet red vermouth, elderflower",
+  "Джин, красный сладкий вермут, кампари": "Gin, sweet red vermouth, Campari",
+  "Водка, кофейный ликер, сливки 11%": "Vodka, coffee liqueur, 11% cream",
+  "Апероль, сухое игристое, содовая": "Aperol, dry sparkling wine, soda",
+  "Ванильная водка, маракуйя, сухое игристое вино": "Vanilla vodka, passion fruit, dry sparkling wine",
+  "Виски, трипл сек, лимонный сок, спрайт": "Whiskey, triple sec, lemon juice, Sprite",
+  "Текила, трипл сек, сок лайма": "Tequila, triple sec, lime juice",
+  "Бурбон, лимонный сок, белок, ангостура": "Bourbon, lemon juice, egg white, Angostura",
+  "Джин, пюре малины, сок лайма, белок": "Gin, raspberry puree, lime juice, egg white",
+  "Водка, эспрессо, кофейный ликер": "Vodka, espresso, coffee liqueur",
+  "Джин, базилик, лимонный сок": "Gin, basil, lemon juice"
+};
+
+function localizeWeight(weight: string | undefined, lang: Locale) {
+  if (!weight || lang === "ru") return weight;
+
+  return weight
+    .replaceAll("г", "g")
+    .replaceAll("мл", "ml")
+    .replaceAll("л", "L")
+    .replaceAll("Италия", "Italy")
+    .replaceAll("Франция", "France")
+    .replaceAll("Венето", "Veneto")
+    .replaceAll("Эльзас", "Alsace");
+}
+
+function toEnglish(data: MenuSection[]): MenuSection[] {
+  return data.map((section) => ({
+    ...section,
+    title: sectionTitleEn[section.title] ?? section.title,
+    categories: section.categories.map((category) => ({
+      ...category,
+      title: categoryTitleEn[category.title] ?? category.title,
+      items: category.items.map((item) => ({
+        ...item,
+        name: itemNameEn[item.name] ?? item.name,
+        description: item.description ? descriptionEn[item.description] ?? item.description : undefined,
+        weight: localizeWeight(item.weight, "en")
+      }))
+    }))
+  }));
+}
+
+export function getMenuData(lang: Locale): MenuSection[] {
+  return lang === "ru" ? menuDataRu : toEnglish(menuDataRu);
+}
