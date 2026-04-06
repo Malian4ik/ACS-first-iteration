@@ -4,26 +4,27 @@ import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { AvulusNav } from "@/components/layout/avulus-nav";
 import { PricingSection } from "@/components/pricing";
 import { contactLinks, cyberclubPage, sharedImages } from "@/lib/stitch-site";
-import { getDictionary, Locale } from "@/lib/dictionaries";
+import { getDictionary } from "@/lib/dictionaries";
 
 export default async function CyberClubPage({
   params,
 }: {
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const t = getDictionary(lang);
+  const locale = lang === "en" ? "en" : "ru";
+  const t = getDictionary(locale);
 
   const navItems = cyberclubPage.nav.map((item, i) => ({
     ...item,
     label: i === 0 ? t.nav.arena : t.nav.restaurant,
-    href: `/${lang}${item.href}`
+    href: `/${locale}${item.href}`
   }));
 
   return (
     <>
       <div className="watermark-arena" style={{ backgroundImage: `url(${sharedImages.arenaWatermark})` }} />
-      <AvulusNav items={navItems} lang={lang} />
+      <AvulusNav items={navItems} lang={locale} />
 
       <main className="content-layer">
         <header className="avulus-grid relative flex min-h-[884px] flex-col items-center justify-center px-6 pt-20">
@@ -131,7 +132,7 @@ export default async function CyberClubPage({
           </div>
         </section>
 
-        <PricingSection t={t.cyberclub.pricing} lang={lang} />
+        <PricingSection t={t.cyberclub.pricing} lang={locale} />
 
         <section className="avulus-grid overflow-hidden bg-[#131314] px-6 py-32" id="hardware">
           <div className="mx-auto grid max-w-7xl gap-20 lg:grid-cols-2 lg:items-center">
@@ -194,7 +195,7 @@ export default async function CyberClubPage({
         </div>
       </main>
 
-      <AvulusFooter lang={lang} />
+      <AvulusFooter lang={locale} />
     </>
   );
 }

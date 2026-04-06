@@ -5,15 +5,16 @@ import { AvulusNav } from "@/components/layout/avulus-nav";
 import { RestaurantMenu } from "@/components/restaurant-menu";
 import TeamShowcase, { type ShowcaseDish } from "@/components/ui/team-showcase";
 import { restaurantPage, sharedImages } from "@/lib/stitch-site";
-import { getDictionary, Locale } from "@/lib/dictionaries";
+import { getDictionary } from "@/lib/dictionaries";
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const seo = getDictionary(lang).restaurant.seo;
+  const locale = lang === "en" ? "en" : "ru";
+  const seo = getDictionary(locale).restaurant.seo;
 
   return {
     title: seo.title,
@@ -24,83 +25,84 @@ export async function generateMetadata({
 export default async function RestaurantPage({
   params,
 }: {
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const t = getDictionary(lang);
+  const locale = lang === "en" ? "en" : "ru";
+  const t = getDictionary(locale);
 
   const navItems = restaurantPage.nav.map((item, i) => ({
     ...item,
     label: i === 0 ? t.nav.arena : t.nav.restaurant,
-    href: `/${lang}${item.href}`
+    href: `/${locale}${item.href}`
   }));
 
   const foodShowcaseItems: ShowcaseDish[] = [
     {
       id: "dish-1",
-      name: lang === "ru" ? "Тартар из лосося" : "Void-Sea Tartare",
-      category: lang === "ru" ? "Холодная подача" : "Cold Starter",
+      name: locale === "ru" ? "Тартар из лосося" : "Void-Sea Tartare",
+      category: locale === "ru" ? "Холодная подача" : "Cold Starter",
       image: restaurantPage.dishes[0].image,
       description:
-        lang === "ru"
+        locale === "ru"
           ? "Светлая подача с акцентом на свежесть и текстуру. Карточка читабельна даже в крупном вертикальном формате."
           : "A cleaner plated composition with enough texture and contrast to hold up in a tall editorial crop.",
-      accent: lang === "ru" ? "Шеф рекомендует" : "Chef Pick",
-      tags: lang === "ru" ? ["Свежесть", "Фирменное"] : ["Fresh", "Signature"]
+      accent: locale === "ru" ? "Шеф рекомендует" : "Chef Pick",
+      tags: locale === "ru" ? ["Свежесть", "Фирменное"] : ["Fresh", "Signature"]
     },
     {
       id: "dish-2",
-      name: lang === "ru" ? "Неоновый бар Avulus" : "Avulus Neon Bar",
-      category: lang === "ru" ? "Барная зона" : "Bar Scene",
+      name: locale === "ru" ? "Неоновый бар Avulus" : "Avulus Neon Bar",
+      category: locale === "ru" ? "Барная зона" : "Bar Scene",
       image: restaurantPage.atmosphereImage,
       description:
-        lang === "ru"
+        locale === "ru"
           ? "Светящийся бар хорошо передает настроение зала и визуально связывает кухню с коктейльной подачей."
           : "The illuminated bar sets the mood of the room and ties the dining story to the cocktail program.",
-      accent: lang === "ru" ? "Бар и коктейли" : "Bar & Cocktails",
-      tags: lang === "ru" ? ["Неон", "Бар"] : ["Neon", "Bar"]
+      accent: locale === "ru" ? "Бар и коктейли" : "Bar & Cocktails",
+      tags: locale === "ru" ? ["Неон", "Бар"] : ["Neon", "Bar"]
     },
     {
       id: "dish-3",
-      name: lang === "ru" ? "Фирменный бургер" : "Core Bypass Burger",
-      category: lang === "ru" ? "Основное блюдо" : "Main Course",
+      name: locale === "ru" ? "Фирменный бургер" : "Core Bypass Burger",
+      category: locale === "ru" ? "Основное блюдо" : "Main Course",
       image: restaurantPage.dishes[2].image,
       description:
-        lang === "ru"
+        locale === "ru"
           ? "Бургер раскрывается заметно лучше в крупной карточке, чем в маленьком квадрате галереи."
           : "The burger reads much better at a larger scale than it did in the old square gallery tiles.",
-      accent: lang === "ru" ? "Хит меню" : "Top Seller",
-      tags: lang === "ru" ? ["Сытно", "Гриль"] : ["Hearty", "Grill"]
+      accent: locale === "ru" ? "Хит меню" : "Top Seller",
+      tags: locale === "ru" ? ["Сытно", "Гриль"] : ["Hearty", "Grill"]
     },
     {
       id: "dish-4",
-      name: lang === "ru" ? "Лаунж-зона ресторана" : "Restaurant Lounge",
-      category: lang === "ru" ? "Интерьер" : "Interior",
+      name: locale === "ru" ? "Лаунж-зона ресторана" : "Restaurant Lounge",
+      category: locale === "ru" ? "Интерьер" : "Interior",
       image: sharedImages.restaurantWatermark,
       description:
-        lang === "ru"
+        locale === "ru"
           ? "Мягкий свет, приватная посадка и яркие акценты делают пространство более премиальным на фото."
           : "Soft lounge seating, privacy, and vivid accents make the restaurant feel more premium in the gallery.",
-      accent: lang === "ru" ? "Атмосфера зала" : "Dining Mood",
-      tags: lang === "ru" ? ["Лаунж", "Посадка"] : ["Lounge", "Seating"]
+      accent: locale === "ru" ? "Атмосфера зала" : "Dining Mood",
+      tags: locale === "ru" ? ["Лаунж", "Посадка"] : ["Lounge", "Seating"]
     },
     {
       id: "dish-5",
-      name: lang === "ru" ? "Барная стойка Avulus" : "Avulus Bar Counter",
-      category: lang === "ru" ? "Коктейльный сервис" : "Cocktail Service",
+      name: locale === "ru" ? "Барная стойка Avulus" : "Avulus Bar Counter",
+      category: locale === "ru" ? "Коктейльный сервис" : "Cocktail Service",
       image: restaurantPage.heroImage,
       description:
-        lang === "ru"
+        locale === "ru"
           ? "Широкий кадр со стойкой и светом показывает ресторан как полноценное вечернее пространство, а не только меню."
           : "The wide bar-counter shot presents the restaurant as a full evening destination, not just a menu page.",
-      accent: lang === "ru" ? "Вечерняя подача" : "Evening Venue",
-      tags: lang === "ru" ? ["Стойка", "Неон"] : ["Counter", "Neon"]
+      accent: locale === "ru" ? "Вечерняя подача" : "Evening Venue",
+      tags: locale === "ru" ? ["Стойка", "Неон"] : ["Counter", "Neon"]
     }
   ];
 
   return (
     <>
-      <AvulusNav items={navItems} lang={lang} />
+      <AvulusNav items={navItems} lang={locale} />
 
       <main className="content-layer bg-[#131314]">
         {/* Main Hero Wrapper - Place for future picture */}
@@ -108,7 +110,7 @@ export default async function RestaurantPage({
           <div className="absolute inset-0 z-0">
             {/* Temp hero picture injected here */}
             <Image
-              alt={lang === "ru" ? "Барная стойка ресторана Avulus в Москве" : "Avulus restaurant bar counter in Moscow"}
+              alt={locale === "ru" ? "Барная стойка ресторана Avulus в Москве" : "Avulus restaurant bar counter in Moscow"}
               className="object-cover opacity-30 grayscale"
               fill
               priority
@@ -154,7 +156,7 @@ export default async function RestaurantPage({
         </header>
 
         {/* Fancy Restaraunt Menu Component */}
-        <RestaurantMenu lang={lang} />
+        <RestaurantMenu lang={locale} />
 
         {/* Food Showcase Gallery */}
         <section className="relative z-10 mx-auto max-w-7xl px-6 py-24 border-t border-[#484849]/15">
@@ -167,7 +169,7 @@ export default async function RestaurantPage({
         </section>
       </main>
 
-      <AvulusFooter lang={lang} stable />
+      <AvulusFooter lang={locale} stable />
     </>
   );
 }

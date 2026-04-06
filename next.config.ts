@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
-  distDir: ".next-local",
+  distDir: process.env.VERCEL ? undefined : ".next-local",
   images: {
     formats: ["image/avif", "image/webp"]
   },

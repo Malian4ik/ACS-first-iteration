@@ -3,16 +3,17 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 
 import "../globals.css";
-import { getDictionary, Locale } from "@/lib/dictionaries";
+import { getDictionary } from "@/lib/dictionaries";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk"
 });
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
-  const t = getDictionary(lang).meta;
+  const locale = lang === "en" ? "en" : "ru";
+  const t = getDictionary(locale).meta;
   return {
     title: t.title,
     description: t.description
@@ -24,12 +25,13 @@ export default async function RootLayout({
   params
 }: Readonly<{
   children: ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  const locale = lang === "en" ? "en" : "ru";
 
   return (
-    <html lang={lang}>
+    <html lang={locale}>
       <body className={spaceGrotesk.variable}>
         {children}
       </body>

@@ -4,26 +4,27 @@ import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { AvulusNav } from "@/components/layout/avulus-nav";
 import { Contacts } from "@/components/contacts";
 import { homePage, sharedImages } from "@/lib/stitch-site";
-import { getDictionary, Locale } from "@/lib/dictionaries";
+import { getDictionary } from "@/lib/dictionaries";
 
 export default async function HomePage({
   params,
 }: {
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const t = getDictionary(lang);
+  const locale = lang === "en" ? "en" : "ru";
+  const t = getDictionary(locale);
 
   const navItems = homePage.nav.map((item, i) => ({
     ...item,
     label: i === 0 ? t.nav.arena : t.nav.restaurant,
-    href: `/${lang}${item.href}`
+    href: `/${locale}${item.href}`
   }));
 
   return (
     <>
       <div className="watermark-home" style={{ backgroundImage: `url(${sharedImages.homeWatermark})` }} />
-      <AvulusNav items={navItems} lang={lang} />
+      <AvulusNav items={navItems} lang={locale} />
 
       <main className="content-layer">
         <section className="relative flex h-screen min-h-[884px] flex-col items-center justify-center overflow-hidden px-4 text-center">
@@ -48,13 +49,13 @@ export default async function HomePage({
           <div className="relative z-10 flex w-full max-w-xl flex-col gap-4 md:flex-row">
             <Link
               className="flex-1 bg-[#CA98FF] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#46007D] transition-all hover:bg-[#9c42f4]"
-              href={`/${lang}/cyberclub#book-pc`}
+              href={`/${locale}/cyberclub#book-pc`}
             >
               {t.home.bookPc}
             </Link>
             <Link
               className="flex-1 border border-[#484849] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#CA98FF] transition-all hover:border-[#CA98FF]"
-              href={`/${lang}/restaurant#reserve`}
+              href={`/${locale}/restaurant#reserve`}
             >
               {t.home.reserveTable}
             </Link>
@@ -71,7 +72,7 @@ export default async function HomePage({
             return (
               <Link
                 key={sector.title}
-                href={`/${lang}${sector.href}`}
+                href={`/${locale}${sector.href}`}
                 className="group relative flex min-h-[442px] cursor-pointer flex-col justify-end overflow-hidden bg-[#131314] p-12"
               >
                 <div className="absolute inset-0 opacity-40 transition-transform duration-700 group-hover:scale-110">
@@ -116,8 +117,8 @@ export default async function HomePage({
         </section>
       </main>
 
-      <Contacts lang={lang} />
-      <AvulusFooter lang={lang} />
+      <Contacts lang={locale} />
+      <AvulusFooter lang={locale} />
     </>
   );
 }

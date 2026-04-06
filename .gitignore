@@ -11,3 +11,7 @@ pnpm-debug.log*
 .env.*.local
 dist
 out
+.vercel
+dev-server*.log
+docs/review-assets
+docs/*.docx
